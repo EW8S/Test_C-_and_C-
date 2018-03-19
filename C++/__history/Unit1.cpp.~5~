@@ -1,0 +1,73 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+String path;
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+
+
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::btnFileClick(TObject *Sender)
+{
+this->OpenDialog1->Filter = "Текстовые файлы (.txt)|*.txt|";
+if (!this->OpenDialog1->Execute()) return;
+TStringList *list = new TStringList;
+path = this->OpenDialog1->FileName;
+list->LoadFromFile(this->OpenDialog1->FileName);
+this->ListView1->Clear();
+int cnt = list->Count;
+
+for(int t=0; (t<cnt)&&(t<100); t++)
+	{
+	this->ListView1->Items->Add();
+	int seporator = list->Strings[t].Pos(",");
+	String id = list->Strings[t].SubString(0,seporator-1);
+	this->ListView1->Items->Item[t]->Caption=id;   // Добав)ить одну запись в капшен 1 стобец
+	list->Strings[t] = list->Strings[t].SubString(seporator+1, list->Strings[t].Length());
+
+	seporator = list->Strings[t].Pos(",");
+	id = list->Strings[t].SubString(0,seporator-1);
+	this->ListView1->Items->Item[t]->SubItems->Add(id);   // Добав)ить одну запись в капшен 1 стобец
+	list->Strings[t] = list->Strings[t].SubString(seporator+1, list->Strings[t].Length());
+
+	this->ListView1->Items->Item[t]->SubItems->Add(list->Strings[t]);
+
+	if(t==0)
+		{
+		
+		}
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::btnApplyClick(TObject *Sender)
+{
+
+ this->ListView1->Items->Item[0]->SubItems->Strings[0] = txFirst->Text;
+ this->ListView1->Items->Item[0]->SubItems->Strings[1] = txSecond->Text;
+
+
+TStringList *list = new TStringList;
+for(int i=0; i<this->ListView1->Items->Count; i++)
+	{
+	list->Add(this->ListView1->Items->Item[i]->Caption+","+
+				this->ListView1->Items->Item[i]->SubItems->Strings[0]+","+
+				this->ListView1->Items->Item[i]->SubItems->Strings[1]
+	);
+
+	}
+
+	list->SaveToFile(path);
+}
+//---------------------------------------------------------------------------

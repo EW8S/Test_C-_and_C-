@@ -1,0 +1,72 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 247
+  ClientWidth = 480
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ListView1: TListView
+    Left = 8
+    Top = 8
+    Width = 350
+    Height = 231
+    Columns = <
+      item
+        Caption = 'id'
+      end
+      item
+        Caption = 'First name'
+        Width = 150
+      end
+      item
+        Caption = 'Second Name'
+        Width = 150
+      end>
+    GridLines = True
+    TabOrder = 0
+    ViewStyle = vsReport
+  end
+  object txFirst: TEdit
+    Left = 364
+    Top = 8
+    Width = 108
+    Height = 21
+    TabOrder = 1
+  end
+  object txSecond: TEdit
+    Left = 364
+    Top = 35
+    Width = 108
+    Height = 21
+    TabOrder = 2
+  end
+  object btnApply: TButton
+    Left = 364
+    Top = 62
+    Width = 108
+    Height = 25
+    Caption = 'Apply'
+    TabOrder = 3
+  end
+  object btnFile: TButton
+    Left = 364
+    Top = 214
+    Width = 108
+    Height = 25
+    Caption = 'File'
+    TabOrder = 4
+    OnClick = btnFileClick
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 376
+    Top = 160
+  end
+end
